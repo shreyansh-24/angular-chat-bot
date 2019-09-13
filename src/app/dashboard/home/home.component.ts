@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
 
   // @ViewChild('parent') parent;
   @ViewChild('child') child;
+  @ViewChild('main') main;
 
 
   public incomingMessage: any;
@@ -19,24 +20,28 @@ export class HomeComponent implements OnInit {
 
   public subject = webSocket('wss://echo.websocket.org');
 
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef
   ) { }
 
   ngOnInit() {
+
   }
 
   onSendHit() {
     const li = this.renderer.createElement('div');
+    this.renderer.addClass(li, 'krm');
     const text = this.renderer.createText(this.message);
     this.renderer.appendChild(li, text);
+
     this.renderer.appendChild(this.child.nativeElement, li);
 
     setTimeout(() => {
 
       const li2 = this.renderer.createElement('div');
-      this.renderer.addClass(li2, 'wild');
+      this.renderer.addClass(li2, 'luky');
       const text2 = this.renderer.createText(this.incomingMessage);
       this.renderer.appendChild(li2, text2);
       this.renderer.appendChild(this.child.nativeElement, li2);
@@ -48,7 +53,12 @@ export class HomeComponent implements OnInit {
       this.incomingMessage = data;
       console.log('incoming =====', data);
       this.subject.complete();
+      const container = document.getElementById('msgContainer');
+      container.scrollTop = container.scrollHeight;
     });
+
+    // window.scrollTo(0,document.body.scrollHeight);
+    window.scrollTo(0, this.main.nativeElement.scrollHeight);
 
 
   }

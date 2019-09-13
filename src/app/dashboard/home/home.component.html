@@ -24,48 +24,15 @@
 <button (click)="onSendHit()">Send</button> -->
 
 
-<div class="conversation">
+<div #main id="msgContainer" class="conversation">
 
   <div class="heading">
     <div class="convn-info">Me and Lucas</div>
   </div>
-  <div class="krm">
-    Kaushalya:
-    <div class="content">Hi There</div>
-    <div class="message-time">11:57 </div>
+  <div #child class="custom-scroll-container">
   </div>
-  <div class="luky">
-    Lucas:
-    <div class="content">Hi Here?</div>
-    <div class="message-time">11:58</div>
-  </div>
-  <!-- <div class="krm">Kaushalya:
-    <div class="content">I'm great... sup?</div>
-    <div class="message-time">11:58</div>
-  </div>
-  <div class="luky">Lucas:
-    <div class="content">Not much.</div>
-    <div class="message-time">11:59</div>
-  </div>
-  <div class="krm">Kaushalya:
-    <div class="content">Btw coming to my home at evening or not?</div>
-    <div class="message-time">12:00</div>
-  </div>
-  <div class="luky">Lucas:
-    <div class="content">I've to work a lot...I'll call you later bye...</div>
-    <div class="message-time">12:00</div>
-  </div>
-  <div class="krm">Kaushalya:
-    <div class="content">Ok bye.</div>
-    <div class="message-time">12:01</div>
-  </div> -->
 </div>
-<input type="text" value="hello" name="text" [(ngModel)]="message">
-<button (click)="onSendHit()">Send</button>
-
-<!-- <p appHighlight>wild class</p>
-<article appHighlight></article> -->
-
-<p #child></p>
-<!-- <p #parent style="margin-left: 50px"></p> -->
-<!-- <article style="margin-left: 50px"></article> -->
+<div class="inputchat">
+  <input type="text" value="hello" name="text" [(ngModel)]="message">
+  <button type="submit" (click)="onSendHit()">Send</button>
+</div>

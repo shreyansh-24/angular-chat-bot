@@ -133,3 +133,16 @@ div.conversation ::moz-selection {
 .wild {
   margin-left: 50px;
 }
+
+.custom-scroll-container {
+  height: 65vh;
+  max-height: 65vh;
+  overflow: auto;
+}
+
+div.inputchat {
+  color: #ecf0f1;
+  font-size: 1.3em;
+  margin: 2em auto;
+  max-width: 21em;
+}
