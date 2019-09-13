@@ -9,7 +9,7 @@ import { addPlayer } from '@angular/core/src/render3/players';
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild('parent') parent;
+  // @ViewChild('parent') parent;
   @ViewChild('child') child;
 
 
@@ -36,25 +36,20 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
 
       const li2 = this.renderer.createElement('div');
+      this.renderer.addClass(li2, 'wild');
       const text2 = this.renderer.createText(this.incomingMessage);
       this.renderer.appendChild(li2, text2);
       this.renderer.appendChild(this.child.nativeElement, li2);
-    }, 1500);
+    }, 2000);
 
     this.subject.next(this.message);
     console.log('send=======', this.message);
     this.subject.subscribe((data: any) => {
       this.incomingMessage = data;
-      // this.incomingMessage.push({
-      //   content: data
-      // });
       console.log('incoming =====', data);
       this.subject.complete();
     });
-    // this.messageStream.push({
-    //   content: this.message
-    // });
-    // this.renderer.appendChild(this.parent.nativeElement, this.child.nativeElement);
+
 
   }
 
