@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { addPlayer } from '@angular/core/src/render3/players';
+import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/websocket.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('child') child;
   @ViewChild('main') main;
 
+  public subscription: any;
+  public userName: any;
+
 
   public incomingMessage: any;
   public message: any;
@@ -23,10 +28,17 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private router: Router,
+    private service: WebsocketService
   ) { }
 
   ngOnInit() {
+
+    this.subscription = this.service.data
+      .subscribe((res) => {
+        this.userName = res;
+      });
 
   }
 
@@ -45,7 +57,7 @@ export class HomeComponent implements OnInit {
       const text2 = this.renderer.createText(this.incomingMessage);
       this.renderer.appendChild(li2, text2);
       this.renderer.appendChild(this.child.nativeElement, li2);
-    }, 2000);
+    }, 2500);
 
     this.subject.next(this.message);
     console.log('send=======', this.message);
@@ -53,14 +65,18 @@ export class HomeComponent implements OnInit {
       this.incomingMessage = data;
       console.log('incoming =====', data);
       this.subject.complete();
-      const container = document.getElementById('msgContainer');
-      container.scrollTop = container.scrollHeight;
+      this.main.scrollTo(500, 0);
     });
 
-    // window.scrollTo(0,document.body.scrollHeight);
-    window.scrollTo(0, this.main.nativeElement.scrollHeight);
+    this.resetInput();
+  }
 
+  logout() {
+    this.router.navigate(['/login']);
+  }
 
+  resetInput() {
+    this.message = null;
   }
 
 

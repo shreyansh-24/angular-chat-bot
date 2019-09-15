@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/websocket.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,24 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  public name: any;
+  public password: any;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private service: WebsocketService
   ) { }
 
   ngOnInit() {
   }
   login() {
-    this.router.navigate(['/home']);
+    if (!this.name || !this.password) {
+      alert('Please enter both Username and Password to Login');
+    } else {
+      this.service.data.next(this.name);
+      this.router.navigate(['/home']);
+
+    }
   }
 
 }

@@ -24,15 +24,56 @@
 <button (click)="onSendHit()">Send</button> -->
 
 
+<div class="nav">
+  <input type="checkbox" id="nav-check">
+  <div class="nav-header">
+    <div class="nav-title">
+      Hi, {{userName}}
+    </div>
+  </div>
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
+
+  <div class="nav-links">
+
+    <a class="link" target="_blank" (click)="logout()">Log Out</a>
+  </div>
+</div>
+
+
 <div #main id="msgContainer" class="conversation">
 
-  <div class="heading">
+  <!-- <div class="heading">
     <div class="convn-info">Me and Lucas</div>
-  </div>
+  </div> -->
   <div #child class="custom-scroll-container">
   </div>
+
 </div>
-<div class="inputchat">
-  <input type="text" value="hello" name="text" [(ngModel)]="message">
-  <button type="submit" (click)="onSendHit()">Send</button>
+<div class="col-3">
+  <form>
+    <input class="effect-8" placeholder="Type message" type="text" value="hello" name="text" [(ngModel)]="message">
+    <span class="focus-border">
+    </span>
+
+    <button class="send-button" [disabled]="!message" type="submit" (click)="onSendHit()">Send</button>
+  </form>
 </div>
+<!-- <form>
+  <div class="inputchat">
+    <input type="text" value="hello" name="text" [(ngModel)]="message">
+    <button [disabled]="!message" type="submit" (click)="onSendHit()">Send</button>
+  </div>
+</form> -->
+
+<!-- <div class="row">
+  <div class="container"> -->
+
+
+<!-- </div>
+</div> -->

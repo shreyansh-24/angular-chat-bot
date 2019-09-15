@@ -1,12 +1,14 @@
-<h1>Flat Login Form inside a Mac Monitor</h1>
+<h1>Welcome to inFeedo Mirror chat</h1>
 
 <div class="stand">
   <div class="outer-screen">
     <div class="inner-screen">
       <div class="form">
-        <input type="text" class="zocial-dribbble" placeholder="Enter your email" />
-        <input type="text" placeholder="Password" />
+
+        <input type="text" class="zocial-dribbble" name="userName" placeholder="Enter your Username" [(ngModel)]="name" />
+        <input type="text" placeholder="Password" name="password" [(ngModel)]="password" />
         <input type="submit" value="Login" (click)="login()" />
+
         <a href="">Lost your password?</a>
       </div>
     </div>
