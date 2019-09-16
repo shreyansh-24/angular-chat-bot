@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
 
       }
 
-    } else {
+    }
+    if (!this.onlineOffline) {
       alert('Looks like you are not connected to internet. Please connect to an internet source to use the application!');
     }
   }
