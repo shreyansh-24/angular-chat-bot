@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     if (!this.name || !this.password) {
       alert('Please enter both Username and Password to Login');
     } else {
+      localStorage.setItem('name', this.name);
       this.service.data.next(this.name);
       this.router.navigate(['/home']);
 

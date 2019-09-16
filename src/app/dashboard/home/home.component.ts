@@ -1,7 +1,7 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { addPlayer } from '@angular/core/src/render3/players';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { WebsocketService } from 'src/app/websocket.service';
 
 @Component({
@@ -9,14 +9,13 @@ import { WebsocketService } from 'src/app/websocket.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  // @ViewChild('parent') parent;
+export class HomeComponent implements OnInit, AfterViewChecked {
   @ViewChild('child') child;
   @ViewChild('main') main;
 
   public subscription: any;
   public userName: any;
+  public browserRefresh: any;
 
 
   public incomingMessage: any;
@@ -31,16 +30,35 @@ export class HomeComponent implements OnInit {
     private el: ElementRef,
     private router: Router,
     private service: WebsocketService
-  ) { }
+  ) {
+    this.subscription = router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.browserRefresh = !router.navigated;
+      }
+    });
+  }
 
   ngOnInit() {
-
     this.subscription = this.service.data
       .subscribe((res) => {
         this.userName = res;
       });
-
   }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.child.nativeElement.scrollTop = this.child.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
 
   onSendHit() {
     const li = this.renderer.createElement('div');
@@ -57,7 +75,7 @@ export class HomeComponent implements OnInit {
       const text2 = this.renderer.createText(this.incomingMessage);
       this.renderer.appendChild(li2, text2);
       this.renderer.appendChild(this.child.nativeElement, li2);
-    }, 2500);
+    }, 2000);
 
     this.subject.next(this.message);
     console.log('send=======', this.message);
@@ -65,7 +83,7 @@ export class HomeComponent implements OnInit {
       this.incomingMessage = data;
       console.log('incoming =====', data);
       this.subject.complete();
-      this.main.scrollTo(500, 0);
+
     });
 
     this.resetInput();

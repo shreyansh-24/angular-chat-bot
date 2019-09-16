@@ -12,6 +12,7 @@
 body {
   background: #95a5a6;
   font-family: 'Nunito', sans-serif;
+  margin: 0px !important
 }
 
 div.conversation {
@@ -173,7 +174,7 @@ inputchats {
 input[type="text"] {
   font: 15px/24px "Lato", Arial, sans-serif;
   color: #333;
-  width: 100%;
+  width: 93.1%;
   box-sizing: border-box;
   letter-spacing: 1px;
 }
@@ -338,4 +339,8 @@ body {
 }
 .link {
   cursor: pointer;
+}
+
+.chat-input {
+  margin-left: 29px;
 }
