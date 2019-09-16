@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login() {
+    console.log(this.onlineOffline);
     if (this.onlineOffline) {
       if (!this.name || !this.password) {
         alert('Please enter both Username and Password to Login');
